@@ -37,3 +37,5 @@ export const property = (str: string[], [start, end]: [number, number]): string[
 export const removeWhiteSpace = (str: string): string => str.replace(/\s+/g, "");
 
 export const hexToDec = (hex: string): number => parseInt(hex, 16);
+
+export const hexToBin = (hex: string): string => parseInt(hex, 16).toString(2).padStart(8, "0");

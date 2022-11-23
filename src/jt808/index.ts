@@ -1,10 +1,15 @@
-import { CDP } from "..";
-import { hexToDec, pairSplit, property, removeWhiteSpace, restoreEscape } from "../lib";
-import { MESSAGE_ID } from "./jt808.constants";
+import { CDP } from "../index";
+import { hexToBin, hexToDec, pairSplit, property, removeWhiteSpace, restoreEscape } from "../lib";
+import { MESSAGE_BODY_ATTR, MESSAGE_ID } from "./jt808.constants";
 
 export interface IMessageId {
     hex: string[];
     dec: number;
+}
+
+export interface IMessageBodyAttr {
+    hex: string[];
+    bin: string;
 }
 
 export class JT808 extends CDP {
@@ -32,5 +37,17 @@ export class JT808 extends CDP {
             hex,
             dec,
         } as IMessageId;
+    }
+
+    public get messageBodyAttr(): IMessageBodyAttr {
+        const hex: string[] = property(this.str, MESSAGE_BODY_ATTR);
+        let bin: string = "";
+        hex.map(h => {
+            bin += hexToBin(h);
+        });
+        return {
+            hex,
+            bin
+        } as IMessageBodyAttr;
     }
 }
