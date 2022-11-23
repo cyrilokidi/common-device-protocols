@@ -1,6 +1,6 @@
-import { CDP } from "../index";
+import CDP from "../cdp";
 import { hexToBin, hexToDec, pairSplit, property, removeWhiteSpace, restoreEscape } from "../lib";
-import { MESSAGE_BODY_ATTR, MESSAGE_ID } from "./jt808.constants";
+import { MESSAGE_BODY_ATTR, MESSAGE_ID, TERMINAL_PHONE_NUMBER } from "./jt808.constants";
 
 export interface IMessageId {
     hex: string[];
@@ -12,7 +12,7 @@ export interface IMessageBodyAttr {
     bin: string;
 }
 
-export class JT808 extends CDP {
+export default class JT808 extends CDP {
     str: string[];
 
     constructor(str: string) {
@@ -42,12 +42,18 @@ export class JT808 extends CDP {
     public get messageBodyAttr(): IMessageBodyAttr {
         const hex: string[] = property(this.str, MESSAGE_BODY_ATTR);
         let bin: string = "";
-        hex.map(h => {
+        hex.map((h): void => {
             bin += hexToBin(h);
         });
         return {
             hex,
             bin
         } as IMessageBodyAttr;
+    }
+
+    public get terminalPhoneNumber(): string {
+        const hex: string[] = property(this.str, TERMINAL_PHONE_NUMBER);
+        const str: string = removeWhiteSpace(hex.join(""));
+        return str;
     }
 }

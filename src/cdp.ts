@@ -1,4 +1,4 @@
-export class CDP {
+export default class CDP {
     str: string | string[];
 
     constructor(str: string | string[]) {
