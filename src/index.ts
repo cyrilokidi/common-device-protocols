@@ -1,7 +1,7 @@
 export class CDP {
-    str: string | RegExpMatchArray;
+    str: string | string[];
 
-    constructor(str: string | RegExpMatchArray) {
+    constructor(str: string | string[]) {
         this.str = str;
     }
 }

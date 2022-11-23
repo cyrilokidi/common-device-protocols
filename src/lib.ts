@@ -11,7 +11,7 @@ export enum EJT808EscapeValues {
 
 export const pairSplit = (str: string): RegExpMatchArray => str.match(/(..?)/g);
 
-export const restoreEscape = (str: RegExpMatchArray): string => {
+export const restoreEscape = (str: string[]): string => {
     let result: string = "";
     for (let i: number = 0; i < str.length; i++) {
         const isFlagBit: boolean = i === 0 || i === str.length - 1;
@@ -32,7 +32,7 @@ export const restoreEscape = (str: RegExpMatchArray): string => {
     return result;
 }
 
-export const property = (str: RegExpMatchArray, [start, end]: [number, number]): RegExpMatchArray => str.slice(start, end);
+export const property = (str: string[], [start, end]: [number, number]): string[] => str.slice(start, end);
 
 export const removeWhiteSpace = (str: string): string => str.replace(/\s+/g, "");
 
