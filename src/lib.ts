@@ -1,8 +1,15 @@
-import { EJT808EscapeSubstituteOptions, EJT808EscapeValues } from "./jt808/types";
-
-export const pairSplit = (str: string): RegExpMatchArray => {
-    return str.match(/(..?)/g);
+export enum EJT808EscapeSubstituteOptions {
+    "7D02" = "7E",
+    "7D01" = "7D"
 }
+
+export enum EJT808EscapeValues {
+    "7D" = "7D",
+    "01" = "01",
+    "02" = "02",
+}
+
+export const pairSplit = (str: string): RegExpMatchArray => str.match(/(..?)/g);
 
 export const restoreEscape = (str: RegExpMatchArray): string => {
     let result: string = "";
@@ -24,3 +31,9 @@ export const restoreEscape = (str: RegExpMatchArray): string => {
     }
     return result;
 }
+
+export const property = (str: RegExpMatchArray, [start, end]: [number, number]): RegExpMatchArray => str.slice(start, end);
+
+export const removeWhiteSpace = (str: string): string => str.replace(/\s+/g, "");
+
+export const hexToDec = (hex: string): number => parseInt(hex, 16);
